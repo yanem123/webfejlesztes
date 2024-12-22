@@ -1,0 +1,71 @@
+<div class="music-list">
+    <h1>Zenék</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cím</th>
+          <th>Előadó</th>
+          <th>Album</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let song of zenek">
+          <td>{{ song.id }}</td>
+          <td>{{ song.title }}</td>
+          <td>{{ song.artist }}</td>
+          <td>{{ song.album }}</td>
+          <td>
+            <button (click)="editSong(song)">Szerkesztés</button>
+            <button (click)="deleteSong(song.id)">Törlés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="add-form">
+        <h2>Új dal hozzáadása</h2>
+        <form (ngSubmit)="addSong()">
+          <label>
+            Cím:
+            <input type="text" [(ngModel)]="newZene.title" name="title" required />
+          </label>
+          <label>
+            Előadó:
+            <input type="text" [(ngModel)]="newZene.artist" name="artist" required />
+          </label>
+          <label>
+            Album:
+            <input type="text" [(ngModel)]="newZene.album" name="album" required />
+          </label>
+          <div class="form-actions">
+            <button type="submit">Hozzáadás</button>
+          </div>
+        </form>
+    </div>
+
+    <div class="edit-form" *ngIf="editingSong">
+        <h2>Dal szerkesztése</h2>
+        <form (ngSubmit)="saveSong()">
+          <label>
+            Cím:
+            <input type="text" [(ngModel)]="editingSong.title" name="title" required />
+          </label>
+          <label>
+            Előadó:
+            <input type="text" [(ngModel)]="editingSong.artist" name="artist" required />
+          </label>
+          <label>
+            Album:
+            <input type="text" [(ngModel)]="editingSong.album" name="album" required />
+          </label>
+          <div class="form-actions">
+            <button type="submit">Mentés</button>
+            <button type="button" (click)="cancelEdit()">Mégse</button>
+          </div>
+        </form>
+    </div>
+
+</div>
+
